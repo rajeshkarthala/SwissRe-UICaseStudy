@@ -1,0 +1,75 @@
+:root{
+  --bg: #f7fafc;
+  --accent: #0366d6;
+}
+html,body,#root{ height:100%; margin:0; }
+body{ font-family: Inter, system-ui, Arial, sans-serif; background:var(--bg); color:#0f172a }
+.hero{ padding:32px; text-align:center; background:white; box-shadow:0 1px 4px rgba(2,6,23,0.06); margin:24px; border-radius:8px }
+.hero h1{ margin:0 0 8px 0 }
+.content{ margin:24px; }
+
+/* Data grid styles */
+.data-grid{ background:#fff; border:1px solid #e6e6e6; border-radius:8px; overflow:hidden }
+.grid-header{ display:flex; align-items:center; padding:10px 12px; background:#f8fafc; font-weight:600; border-bottom:1px solid #eef2f7 }
+.grid-header .cell{ display:flex; align-items:center }
+.sort-indicator{ margin-left:6px; color:#64748b; font-size:12px }
+.sort-indicator.active{ color:#0f172a }
+.grid-row{ display:flex; align-items:center; padding:8px 12px; box-sizing:border-box }
+.grid-row.even{ background:#fff }
+.grid-row.odd{ background:#fbfdff }
+.cell{ padding:0 8px; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
+.cell.id{ width:64px; flex:0 0 64px }
+.cell.actions{ width:120px; flex:0 0 120px; text-align:right; color:#0366d6 }
+
+/* Controls and layout */
+.controls{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:12px }
+.controls label{ font-size:13px }
+.controls input, .controls select{ margin-left:8px }
+
+.layout{ display:flex; gap:16px }
+.left{ flex:1 }
+.right{ width:360px }
+
+.workspace{ background:#fff; border:1px solid #e6e6e6; border-radius:8px; padding:12px; height:600px; box-sizing:border-box }
+.workspace.empty{ display:flex; align-items:center; justify-content:center; color:#6b7280 }
+.workspace .workspace-header{ display:flex; justify-content:space-between; align-items:center }
+.workspace .record-summary p{ margin:6px 0 }
+.doc-stub{ margin-top:12px }
+
+.btn{ padding:6px 10px; border-radius:6px; border:1px solid #e2e8f0; background:white; cursor:pointer }
+.btn.primary{ background:#0366d6; color:white; border-color:#0366d6 }
+.btn-link{ background:none; border:none; color:#0366d6; cursor:pointer; margin-left:8px }
+
+.btn-link.disabled{ color:#9ca3af; cursor:not-allowed }
+
+.pagination{ display:flex; gap:12px; align-items:center; margin-top:12px }
+.loading{ padding:8px 12px; color:#374151 }
+
+/* Toasts */
+.toasts{ position:fixed; right:20px; bottom:20px; display:flex; flex-direction:column; gap:8px; z-index:9999 }
+.toast{ background:#0f172a; color:white; padding:10px 12px; border-radius:8px; box-shadow:0 6px 18px rgba(2,6,23,0.2); display:flex; gap:12px; align-items:center }
+.toast-message{ margin-right:8px }
+.toast-actions{ display:flex; gap:8px }
+.toast .btn{ background:rgba(255,255,255,0.08); color:white; border-color:rgba(255,255,255,0.12) }
+.toast .btn-link{ color:#9bd0ff }
+.toast{ position:relative; overflow:hidden }
+.toast-progress{ position:absolute; left:0; bottom:0; height:3px; background:rgba(155,208,255,0.9); transition:width 0.2s linear }
+
+/* Accessibility focus for header cells */
+.grid-header .cell:focus{ outline:3px solid rgba(3,102,214,0.18); outline-offset:2px }
+
+/* Document viewer styles */
+.doc-viewer{ margin-top:12px }
+.viewer-controls{ display:flex; gap:8px; align-items:center; margin-bottom:8px }
+.viewer-progress{ margin-bottom:8px }
+.progress-bar-outer{ background:#eef2f7; height:8px; border-radius:6px; overflow:hidden }
+.progress-bar-inner{ height:100%; background:linear-gradient(90deg,#0366d6,#60a5fa) }
+.chunk-list{ background:#fff; border:1px dashed #e6eef9; padding:8px; height:180px; overflow:auto; border-radius:6px }
+.chunk-item{ padding:6px 8px; border-bottom:1px solid #f1f5f9; font-family:monospace; font-size:12px }
+.chunk-item:last-child{ border-bottom:0 }
+.chunk-item img{ max-width:100%; display:block; margin-top:6px; border-radius:4px; box-shadow:0 2px 8px rgba(2,6,23,0.06) }
+.chunk-item canvas{ display:block; margin-top:6px; max-width:100%; height:auto; border-radius:4px; box-shadow:0 2px 8px rgba(2,6,23,0.06) }
+
+/* Simple controls inside workspace */
+.workspace .viewer-controls label input{ margin-left:6px }
+
