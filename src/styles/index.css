@@ -1,17 +1,20 @@
+/* Moved from src/index.css to src/styles for better structure */
 :root{
-  --bg: #f7fafc;
-  --accent: #0366d6;
+	--bg: #f7fafc;
+	--accent: #0366d6;
 }
-html,body,#root{ height:100%; margin:0; }
+html,body,#root{ height:100%; margin:0; overflow:hidden }
 body{ font-family: Inter, system-ui, Arial, sans-serif; background:var(--bg); color:#0f172a }
-.hero{ padding:32px; text-align:center; background:white; box-shadow:0 1px 4px rgba(2,6,23,0.06); margin:24px; border-radius:8px }
+.app{ height:100%; display:flex; flex-direction:column; box-sizing:border-box; padding:24px }
+.hero{ padding:32px; text-align:center; background:white; box-shadow:0 1px 4px rgba(2,6,23,0.06); margin:0; border-radius:8px }
 .hero h1{ margin:0 0 8px 0 }
-.content{ margin:24px; }
+.content{ margin:0; flex:1 1 auto; overflow:auto }
 
 /* Data grid styles */
 .data-grid{ background:#fff; border:1px solid #e6e6e6; border-radius:8px; overflow:hidden }
 .grid-header{ display:flex; align-items:center; padding:10px 12px; background:#f8fafc; font-weight:600; border-bottom:1px solid #eef2f7 }
 .grid-header .cell{ display:flex; align-items:center }
+.grid-header .cell.actions{ justify-content:center }
 .sort-indicator{ margin-left:6px; color:#64748b; font-size:12px }
 .sort-indicator.active{ color:#0f172a }
 .grid-row{ display:flex; align-items:center; padding:8px 12px; box-sizing:border-box }
@@ -19,7 +22,9 @@ body{ font-family: Inter, system-ui, Arial, sans-serif; background:var(--bg); co
 .grid-row.odd{ background:#fbfdff }
 .cell{ padding:0 8px; flex:1; white-space:nowrap; overflow:hidden; text-overflow:ellipsis }
 .cell.id{ width:64px; flex:0 0 64px }
-.cell.actions{ width:120px; flex:0 0 120px; text-align:right; color:#0366d6 }
+.cell.actions{ width:180px; flex:0 0 180px; text-align:right; color:var(--accent); overflow:visible; white-space:nowrap; display:flex; align-items:center; justify-content:flex-end; gap:6px; flex-wrap:wrap }
+
+.cell.actions .btn-link{ margin-left:0 }
 
 /* Controls and layout */
 .controls{ display:flex; gap:12px; align-items:center; flex-wrap:wrap; margin-bottom:12px }
@@ -28,7 +33,15 @@ body{ font-family: Inter, system-ui, Arial, sans-serif; background:var(--bg); co
 
 .layout{ display:flex; gap:16px }
 .left{ flex:1 }
-.right{ width:360px }
+.right{ flex:0 0 360px }
+
+/* When leftPane is not present, expand the right pane to use full width */
+.layout.single .left{ display:none }
+.layout.single .right{ flex:1 1 0; width:100%; }
+
+/* When fullLeft is active, expand the left pane and hide the right pane */
+.layout.full-left .left{ flex:1 1 100%; width:100% }
+.layout.full-left .right{ display:none }
 
 .workspace{ background:#fff; border:1px solid #e6e6e6; border-radius:8px; padding:12px; height:600px; box-sizing:border-box }
 .workspace.empty{ display:flex; align-items:center; justify-content:center; color:#6b7280 }
@@ -38,7 +51,7 @@ body{ font-family: Inter, system-ui, Arial, sans-serif; background:var(--bg); co
 
 .btn{ padding:6px 10px; border-radius:6px; border:1px solid #e2e8f0; background:white; cursor:pointer }
 .btn.primary{ background:#0366d6; color:white; border-color:#0366d6 }
-.btn-link{ background:none; border:none; color:#0366d6; cursor:pointer; margin-left:8px }
+.btn-link{ background:none; border:none; color:#0366d6; cursor:pointer; margin-left:6px }
 
 .btn-link.disabled{ color:#9ca3af; cursor:not-allowed }
 
@@ -73,3 +86,16 @@ body{ font-family: Inter, system-ui, Arial, sans-serif; background:var(--bg); co
 /* Simple controls inside workspace */
 .workspace .viewer-controls label input{ margin-left:6px }
 
+@media (max-width: 480px) {
+	.cell.actions{
+		flex-direction:column;
+		align-items:flex-end;
+		justify-content:flex-start;
+		width:auto;
+		flex:0 0 auto;
+	}
+	.cell.actions .btn-link{
+		margin-left:0;
+		margin-top:6px;
+	}
+}

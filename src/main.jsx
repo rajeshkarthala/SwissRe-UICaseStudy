@@ -1,25 +1,23 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import App from './App'
-import './index.css'
+import './styles/index.css'
+import ErrorBoundary from './components/ErrorBoundary'
+import Toasts from './components/Toasts'
+import { RoleProvider } from './contexts/RoleContext'
 
 async function init() {
-  if (import.meta.env.DEV) {
-    try {
-      const { startWorker } = await import('./mocks/browser')
-      await startWorker()
-      // eslint-disable-next-line no-console
-      console.log('MSW worker started')
-    } catch (e) {
-      // eslint-disable-next-line no-console
-      console.warn('Failed to start MSW worker', e)
-    }
-  }
+  // MSW startup removed: using Express dev server for API + file Range testing
 
   const root = createRoot(document.getElementById('root'))
   root.render(
     <React.StrictMode>
-      <App />
+      <RoleProvider>
+        <ErrorBoundary>
+          <App />
+          <Toasts />
+        </ErrorBoundary>
+      </RoleProvider>
     </React.StrictMode>
   )
 }
