@@ -24,6 +24,20 @@ Notes:
 - `dev:server` listens on `http://localhost:4000`; Vite proxies `/api` and `/files` to it.
 - If port 4000 is in use, kill the conflicting process before running `dev:server`.
 
+Assumptions made while architecting this demo :
+
+- Backend is the source of truth for authorization and data; the frontend enforces permissions only for UX and convenience.
+- Documents in the target system may be very large (1500 MB–1 GB). This demo uses a small `public/sample.pdf`; production must implement streaming/chunking and server-side support.
+- The included Express dev server is intended for local testing (Range support, simple API). In production, files should be served from object storage or a CDN with signed URLs and proper byte-range handling.
+- RBAC is simplified to three roles (`viewer`, `editor`, `admin`) for demonstration; real systems should integrate an auth provider and server-side enforcement.
+- The dev server's in-memory `DATA` is ephemeral and will reset on restart — persistence is out of scope for this demo.
+- Optimistic UI patterns are used (e.g., delete with undo). Critical operations should use transactional server-side handling and background jobs in production.
+- This prototype does not implement authentication, encryption, or secrets management — assume these will be added by the integrator for real deployments.
+- Some dev tools (e.g., `@vitejs/plugin-react`) may require a modern Node.js runtime; upgrade Node if you see engine warnings.
+- Vite proxies `/api` and `/files` to the Express dev server during development; ensure port and proxy settings match your environment.
+- Accessibility, internationalization, and security hardening are not fully implemented in this prototype and should be prioritized for production.
+
+
  Changes Done :
 - Scaffolded React + Vite app with `react-router` and `react-window` virtualized grid (20k+ rows demo).
 - Added an Express dev server with Range support and example `/api/*` endpoints.
@@ -31,6 +45,8 @@ Notes:
 - Implemented Role-based Access Control (RBAC): `viewer` / `editor` / `admin` via `RoleContext`.
 - Wired grid actions and workspace permissions to `RoleContext`.
 - Global error handling: `ErrorBoundary` and toast service for notifications.
+
+
 
 
 Senior UI Engineering Use Case — Problem Statement (One Page)
